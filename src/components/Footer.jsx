@@ -68,28 +68,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-white mb-5 font-medium">Social</h4>
-            <ul className="space-y-3">
-              <li><a
-                href="https://x.com/tryavvio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4"
-              >
-                X
-              </a></li>
-
-              <li><a
-                href="https://www.instagram.com/tryavvio/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4"
-              >
-                Instagram
-              </a></li>
-            </ul>
-          </div>
+          
 
           <div>
             <h4 className="text-white mb-5 font-medium">Other</h4>
