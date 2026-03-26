@@ -2,7 +2,7 @@ import React from "react";
 
 export default function WaitlistCTA() {
   return (
-    <section className="relative w-full h-[520px] md:h-[620px] flex items-center justify-center overflow-hidden">
+    <section id="waitlist-cta-section" className="relative w-full h-[520px] md:h-[620px] flex items-center justify-center overflow-hidden">
 
       {/* 💵 US DOLLAR BACKGROUND */}
       <img

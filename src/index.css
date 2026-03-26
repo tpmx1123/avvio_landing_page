@@ -30,3 +30,19 @@
     min-height: 100svh;
   }
 }
+
+@layer utilities {
+  @keyframes marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+}

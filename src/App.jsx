@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Hero from './components/Hero'
 import MoneySimpleSection from './components/MoneySimpleSection'
@@ -15,12 +15,16 @@ import Privacy from './components/Privacy'
 import Terms from './components/Terms'
 import Brand from './components/Brand'
 import BlogComingSoon from './components/BlogComingSoon'
+import VirtualAccountsSection from './components/VirtualAccountsSection'
+import OneAccountSection from './components/OneAccountSection'
+import FAQ from './components/FAQ'
 
 const PHONE_IMAGE =
   'https://res.cloudinary.com/dhzhuobu2/image/upload/v1774344202/MOBILE_SCREEN_i8myu5.png'
 
 function HomePage() {
   const containerRef = useRef(null)
+  const [useColorLogo, setUseColorLogo] = useState(false)
   const {
     titleOpacity,
     titleY,
@@ -37,10 +41,51 @@ function HomePage() {
     blur,
   } = useHomeScrollAnimation(containerRef)
 
+  useEffect(() => {
+    const sectionIds = [
+      'virtual-accounts-section',
+      'one-account-section',
+      'trust-strip-section',
+      'waitlist-cta-section',
+      'footer-section',
+    ]
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+
+    if (sections.length === 0) return
+
+    const visibleSections = new Set()
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.target.id) return
+
+          if (entry.isIntersecting) {
+            visibleSections.add(entry.target.id)
+          } else {
+            visibleSections.delete(entry.target.id)
+          }
+        })
+
+        setUseColorLogo(visibleSections.size > 0)
+      },
+      {
+        root: null,
+        rootMargin: '-35% 0px -35% 0px',
+        threshold: [0, 0.15, 0.3, 0.5],
+      }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <div className="min-h-svh bg-gradient-to-b from-[#cf0] to-[#af0]">
-        <Navbar />
+        <Navbar useColorLogo={useColorLogo} />
 
         <main ref={containerRef} className="relative h-[230vh]">
           <motion.div
@@ -66,7 +111,7 @@ function HomePage() {
                 <img
                   src={PHONE_IMAGE}
                   alt="App"
-                  className="h-auto w-[min(78vw,430px)] md:w-[min(52vw,520px)] object-contain  "
+                  className="h-auto w-[min(70vw,390px)] md:w-[min(52vw,520px)] object-contain  "
                 />
               </motion.div>
             </div>
@@ -89,8 +134,12 @@ function HomePage() {
         <GlobalIncomeSection />
         <MakeMoneySection />
         <SavingsFeaturesSection />
-        {/* <TrustStrip /> */}
-        {/* <WaitlistCTA /> */}
+        <VirtualAccountsSection />
+        <OneAccountSection />
+          <TrustStrip />
+          <FAQ />
+        <WaitlistCTA />
+        
       </div>
       <Footer />
     </>

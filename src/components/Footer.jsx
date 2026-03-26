@@ -5,7 +5,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#050505] text-[#9CA3AF] px-6 md:px-20 pt-24 pb-10">
+    <footer id="footer-section" className="bg-[#050505] text-[#9CA3AF] px-6 md:px-20 pt-24 pb-10">
 
       {/* Top Section */}
       <div className="flex flex-col md:flex-row justify-between items-start gap-16">
