@@ -14,7 +14,7 @@ import TrustStrip from './components/TrustStrip'
 import Privacy from './components/Privacy'
 import Terms from './components/Terms'
 import Brand from './components/Brand'
-import BlogComingSoon from './components/BlogComingSoon'
+import Blog from './components/blogPosts'
 import VirtualAccountsSection from './components/VirtualAccountsSection'
 import OneAccountSection from './components/OneAccountSection'
 import FAQ from './components/FAQ'
@@ -136,10 +136,9 @@ function HomePage() {
         <SavingsFeaturesSection />
         <VirtualAccountsSection />
         <OneAccountSection />
-          <TrustStrip />
-          <FAQ />
+        <TrustStrip />
+        <FAQ />
         <WaitlistCTA />
-        
       </div>
       <Footer />
     </>
@@ -153,7 +152,7 @@ export default function App() {
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/brand" element={<Brand />} />
-      <Route path="/blog" element={<BlogComingSoon />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="*" element={<HomePage />} />
     </Routes>
   )

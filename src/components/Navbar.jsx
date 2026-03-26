@@ -23,7 +23,7 @@ export default function Navbar({ useColorLogo = false }) {
           - Replaced fixed gap-209 with md:gap-209 so it only applies to desktop.
           - Added px-4 for mobile and md:px-6 for desktop.
       */}
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 md:justify-around md:px-4 md:gap-[809px]">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 md:justify-around md:px-4 md:gap-[809px] pt-6">
         
         <a href="/" className="flex items-center">
           <img

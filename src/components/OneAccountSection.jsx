@@ -14,7 +14,7 @@ export default function OneAccountSection() {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto space-y-2">
+      <div className="max-w-6xl mx-auto space-y-2">
         
         {/* ROW 1: Move Money */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
