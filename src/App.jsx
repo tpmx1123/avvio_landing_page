@@ -85,10 +85,10 @@ function HomePage() {
 
   return (
     <>
-      <div className="min-h-svh  md:bg-white">
+      <div className="min-h-svh lg:bg-white">
         <Navbar useColorLogo={useColorLogo} />
 
-        <main ref={containerRef} className="relative h-[205vh] md:h-[190vh]">
+        <main ref={containerRef} className="relative h-[205vh] lg:h-[190vh]">
           <motion.div
             className="sticky top-0 h-screen w-full "
             style={{
@@ -112,7 +112,7 @@ function HomePage() {
                 <img
                   src={PHONE_IMAGE}
                   alt="App"
-                  className="h-auto w-[min(60vw,300px)] md:w-[min(42vw,420px)] object-contain  "
+                  className="h-auto w-[min(92vw,420px)] lg:w-[min(42vw,420px)] object-contain"
                 />
               </motion.div>
             </div>
@@ -130,7 +130,7 @@ function HomePage() {
             </div>
           </motion.div>
 
-          <div className="h-screen bg-white" />
+          <div className="h-[145vh] lg:h-screen" />
         </main>
         <GlobalIncomeSection />
         <MakeMoneySection />
@@ -154,6 +154,7 @@ export default function App() {
       <Route path="/terms" element={<Terms />} />
       <Route path="/brand" element={<Brand />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:id" element={<Blog />} />
       <Route path="*" element={<HomePage />} />
     </Routes>
   )

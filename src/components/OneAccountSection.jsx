@@ -2,7 +2,10 @@ import { motion } from 'framer-motion'
 
 export default function OneAccountSection() {
   return (
-    <section id="one-account-section" className="bg-black text-white py-14 px-5 md:py-24 md:px-12">
+    <section
+      id="one-account-section"
+      className="bg-black text-white py-14 px-5 md:py-24 md:px-12 overflow-x-clip"
+    >
       
       {/* HEADER */}
       <div className="max-w-5xl mx-auto text-center mb-12 md:mb-24">
@@ -14,7 +17,7 @@ export default function OneAccountSection() {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto space-y-8 md:space-y-2">
+      <div className="max-w-6xl mx-auto space-y-8 md:space-y-2 overflow-hidden">
         
         {/* ROW 1: Move Money */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-4 items-center">

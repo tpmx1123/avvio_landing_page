@@ -17,7 +17,7 @@ export default function Navbar({ useColorLogo = false }) {
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
         {/* Mobile: only centered logo */}
-        <div className="mx-auto flex w-full items-center justify-center px-6 pt-8 pb-4 md:hidden">
+        <div className="mx-auto flex w-full items-center justify-center px-6 pt-8 pb-4 lg:hidden">
           <a
             href="/"
             className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/40 bg-white/25 shadow-[0_8px_28px_rgba(0,0,0,0.12)] backdrop-blur-md"
@@ -31,7 +31,7 @@ export default function Navbar({ useColorLogo = false }) {
         </div>
 
         {/* Desktop: logo left + CTA right */}
-        <div className="mx-auto hidden w-full max-w-[1440px] items-center justify-between px-24 pt-6 md:flex md:h-24">
+        <div className="mx-auto hidden w-full max-w-[1440px] items-center justify-between px-24 pt-6 lg:flex lg:h-24">
           <a href="/" className="flex items-center shrink-0">
             <img
               src={useColorLogo ? LOGO_COLOR : LOGO_BLACK}
@@ -55,7 +55,7 @@ export default function Navbar({ useColorLogo = false }) {
       </motion.header>
 
       {/* Mobile floating CTA at bottom */}
-      <div className="fixed inset-x-0 bottom-[max(16px,env(safe-area-inset-bottom))] z-120 flex justify-center px-5 md:hidden">
+      <div className="fixed inset-x-0 bottom-[max(16px,env(safe-area-inset-bottom))] z-120 flex justify-center px-5 lg:hidden">
         <a
           href={JOIN}
           className="inline-flex min-w-[170px] items-center justify-center rounded-full bg-[#B4FF00] px-7 py-3 text-center text-[16px] font-bold text-black shadow-[0_10px_30px_rgba(0,0,0,0.22)] transition-transform active:scale-[0.97]"

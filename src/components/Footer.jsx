@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const scrollToTop = () => window.scrollTo(0, 0);
 
   return (
     <footer
@@ -35,13 +36,21 @@ const Footer = () => {
               </li>
 
               <li>
-                <Link to="/privacy" className="underline underline-offset-4">
+                <Link
+                  to="/privacy"
+                  onClick={scrollToTop}
+                  className="underline underline-offset-4"
+                >
                   Privacy Policy
                 </Link>
               </li>
 
               <li>
-                <Link to="/terms" className="underline underline-offset-4">
+                <Link
+                  to="/terms"
+                  onClick={scrollToTop}
+                  className="underline underline-offset-4"
+                >
                   Terms & Conditions
                 </Link>
               </li>

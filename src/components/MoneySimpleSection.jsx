@@ -8,9 +8,9 @@ export default function MoneySimpleSection({
   blur,
 }) {
   return (
-    <section className="absolute inset-0 z-30 flex items-start md:items-center px-6 pt-22 md:pt-20 md:px-12">
+    <section className="absolute inset-x-0 top-0 h-[145vh] lg:inset-0 lg:h-full z-0 lg:z-30 flex items-start lg:items-center px-6 pt-[90vh] lg:pt-0 pb-14 lg:pb-0 lg:px-12">
 
-      <div className="w-full max-w-md mx-auto md:ml-auto md:mr-0 md:max-w-3xl lg:pr-16">
+      <div className="w-full max-w-md mx-auto lg:ml-auto lg:mr-0 lg:max-w-3xl lg:pr-16">
 
         <motion.div
           style={{
@@ -20,13 +20,13 @@ export default function MoneySimpleSection({
             scale: contentScale,
             filter: blur ? `blur(${blur}px)` : 'blur(0px)',
           }}
-          className="text-center "
+          className="text-center pt-6 pb-10 lg:pt-30 lg:pb-0 lg:translate-y-0"
         >
-          <h2 className="text-[40px] md:text-7xl font-black text-black mb-4 md:mb-8 leading-[0.9] tracking-tight ">
+          <h2 className="text-[40px] md:text-[58px] lg:text-7xl font-black text-black mb-4 lg:mb-8 leading-[0.9] tracking-tight ">
             Money, finally <br /> simple
           </h2>
 
-          <p className="text-[16px] md:text-3xl font-medium text-zinc-400 max-w-xl leading-snug">
+          <p className="text-[16px] md:text-[24px] lg:text-3xl font-medium text-zinc-400 max-w-xl leading-snug">
             Avvio replaces multiple accounts, transfers, and apps with one account built for people who live between systems.
           </p>
         </motion.div>

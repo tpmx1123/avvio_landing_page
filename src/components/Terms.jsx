@@ -1,12 +1,17 @@
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Terms = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
-        <div className="bg-black text-white min-h-screen px-6 md:px-24 py-20">
+        <div className="bg-black text-white min-h-screen px-5 md:px-24 py-16 md:py-20">
 
             {/* Top Bar */}
-            <div className="flex justify-between items-center mb-20">
+            <div className="flex justify-between items-center mb-12 md:mb-20">
                 <img
                     src="https://res.cloudinary.com/di4caiech/image/upload/v1774411856/Icon_Color_4x-removebg-preview_wxqq4d.png"
                     alt="Avvio Logo"
@@ -15,16 +20,16 @@ const Terms = () => {
 
                 <Link
                     to="/"
-                    className="bg-white text-black px-5 py-2 rounded-full text-sm font-medium"
+                    className="bg-white text-black px-4 md:px-5 py-2 rounded-full text-[13px] md:text-sm font-medium whitespace-nowrap"
                 >
                     Get early access
                 </Link>
             </div>
 
             {/* Content */}
-            <div className="max-w-[640px] mx-auto text-[#A1A1AA] leading-[1.9] text-[16px]">
+            <div className="max-w-[640px] mx-auto text-[#A1A1AA] leading-[1.8] md:leading-[1.9] text-[15px] md:text-[16px]">
 
-                <h1 className="text-[48px] font-semibold text-white tracking-tight mb-4">
+                <h1 className="text-[36px] md:text-[48px] font-semibold text-white tracking-tight mb-4">
                     Terms of Service
                 </h1>
 
