@@ -11,20 +11,22 @@ export default function TrustStrip() {
   ];
 
   return (
-    <section className="bg-black py-24 overflow-hidden">
+    <section
+      id="trust-strip-section"
+      className="bg-black py-16 overflow-hidden md:py-24"
+    >
 
       <p
-        className="text-center uppercase mb-20 font-medium text-white/40"
-        style={{ fontSize: "22px", letterSpacing: "0.64em", fontWeight: "bold" }}
+        className="text-center uppercase mb-14 md:mb-20 font-bold text-white/40 tracking-[0.64em] text-[16px] md:text-[22px]"
       >
         BUILT WITH TRUSTED INFRASTRUCTURE
       </p>
 
       <div className="relative flex max-w-[1600px] mx-auto overflow-hidden">
 
-        <div className="absolute top-0 left-0 w-24 md:w-40 h-full bg-gradient-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-24 md:w-40 h-full bg-linear-to-r from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
 
-        <div className="marquee-track flex w-max gap-12 items-center">
+        <div className="marquee-track flex w-max gap-6 md:gap-12 items-center">
           {[...logos, ...logos].map((logo, index) => (
             <img
               key={index}
@@ -35,10 +37,10 @@ export default function TrustStrip() {
           ))}
         </div>
 
-        <div className="absolute top-0 right-0 w-24 md:w-40 h-full bg-gradient-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-24 md:w-40 h-full bg-linear-to-l from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
       </div>
 
-      <div className="mt-20 h-[1px] bg-white/10 max-w-6xl mx-auto"></div>
+      <div className="mt-16 md:mt-20 h-px bg-white/10 max-w-6xl mx-auto"></div>
     </section>
   );
 }

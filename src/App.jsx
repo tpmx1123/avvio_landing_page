@@ -20,7 +20,7 @@ import OneAccountSection from './components/OneAccountSection'
 import FAQ from './components/FAQ'
 
 const PHONE_IMAGE =
-  'https://res.cloudinary.com/dhzhuobu2/image/upload/v1774344202/MOBILE_SCREEN_i8myu5.png'
+  'https://res.cloudinary.com/di4caiech/image/upload/v1774596314/EWu41VqQkx12Iz9EYP12sxSuk_2_tpro6q.avif'
 
 function HomePage() {
   const containerRef = useRef(null)
@@ -45,9 +45,10 @@ function HomePage() {
     const sectionIds = [
       'virtual-accounts-section',
       'one-account-section',
+      'faq-section',
+      'footer-section',
       'trust-strip-section',
       'waitlist-cta-section',
-      'footer-section',
     ]
     const sections = sectionIds
       .map((id) => document.getElementById(id))
@@ -87,12 +88,12 @@ function HomePage() {
       <div className="min-h-svh  md:bg-white">
         <Navbar useColorLogo={useColorLogo} />
 
-        <main ref={containerRef} className="relative h-[250vh] md:h-[230vh]">
+        <main ref={containerRef} className="relative h-[205vh] md:h-[190vh]">
           <motion.div
             className="sticky top-0 h-screen w-full "
             style={{
               background:  bgGradient,
-              perspective: '1400px',
+              perspective: '1200px',
             }}
           >
             <div className="absolute inset-0 flex items-end justify-center">
@@ -111,7 +112,7 @@ function HomePage() {
                 <img
                   src={PHONE_IMAGE}
                   alt="App"
-                  className="h-auto w-[min(70vw,390px)] md:w-[min(52vw,520px)] object-contain  "
+                  className="h-auto w-[min(60vw,300px)] md:w-[min(42vw,420px)] object-contain  "
                 />
               </motion.div>
             </div>

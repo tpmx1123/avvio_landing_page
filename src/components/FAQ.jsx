@@ -36,7 +36,7 @@ export default function FAQ() {
     };
 
     return (
-        <section className="w-full py-10 px-6 md:px-16 bg-black text-white">
+        <section id="faq-section" className="w-full py-10 px-6 md:px-16 bg-black text-white">
             <div className="max-w-4xl mx-auto">
 
                 {/* Heading */}

@@ -5,10 +5,13 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="footer-section" className="bg-[#050505] text-[#9CA3AF] px-6 md:px-20 pt-24 pb-10">
+    <footer
+      id="footer-section"
+      className="bg-[#050505] text-[#9CA3AF] px-6 md:px-20 pt-16 md:pt-24 pb-10"
+    >
 
       {/* Top Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start gap-16">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-16">
 
         {/* Logo */}
         <div>
@@ -20,7 +23,7 @@ const Footer = () => {
         </div>
 
         {/* Links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-16 text-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 text-sm">
 
           <div>
             <h4 className="text-white mb-5 font-medium">Legal</h4>
@@ -85,7 +88,7 @@ const Footer = () => {
       {/* ❌ REMOVED divider line */}
 
       {/* Bottom Section */}
-      <div className="mt-16 text-center text-sm text-[#6B7280]">
+      <div className="mt-12 md:mt-16 text-center text-sm text-[#6B7280]">
 
         {/* Copyright */}
         <p className="text-base text-[#9CA3AF]">
@@ -93,7 +96,7 @@ const Footer = () => {
         </p>
 
         {/* ✅ Single line disclaimer */}
-        <p className="mt-3 whitespace-nowrap overflow-hidden text-ellipsis text-sm">
+        <p className="mt-3 whitespace-normal md:whitespace-nowrap md:overflow-hidden md:text-ellipsis text-sm">
           Avvio is a financial technology company, not a bank. Services including virtual accounts, payment cards, and custody are provided by licensed partners. Availability varies by jurisdiction.
         </p>
 

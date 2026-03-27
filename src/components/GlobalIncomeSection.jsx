@@ -25,7 +25,7 @@ export default function GlobalIncomeSection() {
 
         {/* 🔥 HEADER */}
         <div className="text-center mb-16">
-          <h2 className="text-[36px] font-black leading-[1] tracking-tight text-black mb-4 mt-10 md:mt-20 md:text-[60px] md:leading-normal uppercase md:normal-case">
+          <h2 className="text-[36px] font-black leading-[1] tracking-tight text-black mb-4 mt-10 md:mt-40 md:text-[60px] md:leading-normal uppercase md:normal-case">
             Built for <br className="md:hidden" /> global income
           </h2>
 

@@ -2,7 +2,10 @@ import React from "react";
 
 export default function WaitlistCTA() {
   return (
-    <section id="waitlist-cta-section" className="relative w-full h-[520px] md:h-[620px] flex items-center justify-center overflow-hidden">
+    <section
+      id="waitlist-cta-section"
+      className="relative w-full h-[520px] md:h-[620px] flex items-center justify-center overflow-hidden"
+    >
 
       {/* 💵 US DOLLAR BACKGROUND */}
       <img
@@ -15,9 +18,9 @@ export default function WaitlistCTA() {
       <div className="absolute inset-0 bg-black/85"></div>
 
       {/* CONTENT */}
-      <div className="relative z-10 text-center px-6 max-w-5xl">
+      <div className="relative z-10 text-center px-5 md:px-6 max-w-5xl">
 
-        <h2 className="text-[#B4FF00] text-[45px] md:text-[55px] font-bold leading-tight mb-10">
+        <h2 className="text-[#B4FF00] text-[40px] md:text-[55px] font-bold leading-tight mb-7 md:mb-10">
           Join the waitlist and help shape
           <br />
           an account built for a global life.
@@ -27,7 +30,7 @@ export default function WaitlistCTA() {
           href="https://avvio.xyz/join"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-white text-black px-36 py-6 rounded-full text-[16px] font-medium hover:scale-105 transition"
+          className="inline-block bg-white text-black px-10 md:px-36 py-4 md:py-6 rounded-full text-[16px] font-medium hover:scale-105 transition"
         >
           <b>Get early access</b>
         </a>
