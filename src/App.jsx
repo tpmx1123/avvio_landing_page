@@ -84,14 +84,14 @@ function HomePage() {
 
   return (
     <>
-      <div className="min-h-svh bg-gradient-to-b from-[#cf0] to-[#af0]">
+      <div className="min-h-svh  md:bg-white">
         <Navbar useColorLogo={useColorLogo} />
 
-        <main ref={containerRef} className="relative h-[230vh]">
+        <main ref={containerRef} className="relative h-[250vh] md:h-[230vh]">
           <motion.div
             className="sticky top-0 h-screen w-full "
             style={{
-              background: bgGradient,
+              background:  bgGradient,
               perspective: '1400px',
             }}
           >

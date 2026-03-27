@@ -13,8 +13,6 @@ export default function MakeMoneySection() {
         <p className=" text-black font-medium leading-snug tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-7xl">
           Earn up to <span className="font-bold">9% APY</span> on your cash.
         </p>
-        
-
       </div>
     </section>
   )
