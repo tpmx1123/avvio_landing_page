@@ -21,7 +21,7 @@ export function useHomeScrollAnimation(containerRef) {
   const phoneY = useTransform(
     smooth,
     [0, 0.18, 0.3, 0.42, 0.52, END],
-    ['78vh', '20vh', '12vh', '8vh', '4vh', '4vh']
+    ['84vh', '20vh', '12vh', '8vh', '4vh', '4vh']
   )
 
   const phoneX = useTransform(
