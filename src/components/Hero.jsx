@@ -4,7 +4,10 @@ const JOIN = 'https://avvio.xyz/join'
 
 export default function Hero({ titleOpacity, titleY }) {
   return (
-    <section className="relative z-30 flex min-h-screen flex-col items-center justify-start px-6 pt-30 text-center lg:justify-center lg:px-8 lg:pt-20">
+    <section
+      id="hero-section"
+      className="relative z-20 flex min-h-svh flex-col items-center justify-start px-6 pt-32 text-center lg:justify-center lg:px-8 lg:pt-20"
+    >
       <motion.div
         className="pointer-events-auto max-w-6xl"
         style={{ opacity: titleOpacity, y: titleY }}

@@ -5,32 +5,33 @@ export default function MoneySimpleSection({
   contentY,
   contentX,
   contentScale,
-  blur,
+  contentFilter,
 }) {
   return (
-    <section className="absolute inset-x-0 top-0 h-[145vh] lg:inset-0 lg:h-full z-0 lg:z-30 flex items-start lg:items-center px-6 pt-[90vh] lg:pt-0 pb-14 lg:pb-0 lg:px-12">
-
-      <div className="w-full max-w-md mx-auto lg:ml-auto lg:mr-0 lg:max-w-3xl lg:pr-16">
-
+    <section
+      id="money-simple-section"
+      className="relative z-20 flex min-h-svh items-center justify-center bg-transparent px-6 lg:min-h-[132vh] lg:items-start lg:justify-center lg:px-14 lg:pb-8 lg:pt-8 xl:px-16"
+    >
+      {/* Wider column + stronger left shift closes gap to the sticky phone */}
+      <div className="flex w-full max-w-md flex-col items-center text-center lg:ml-auto lg:max-w-none lg:w-[58%] lg:min-w-0 lg:-translate-x-14 lg:sticky lg:top-48 lg:z-30 lg:self-start  xl:w-[60%] xl:-translate-x-20">
         <motion.div
           style={{
             opacity: contentOpacity,
             y: contentY,
             x: contentX,
             scale: contentScale,
-            filter: blur ? `blur(${blur}px)` : 'blur(0px)',
+            filter: contentFilter,
           }}
-          className="text-center pt-6 pb-10 lg:pt-30 lg:pb-0 lg:translate-y-0"
+          className="w-full max-w-xl lg:max-w-none lg:w-2xl"
         >
-          <h2 className="text-[40px] md:text-[58px] lg:text-7xl font-black text-black mb-4 lg:mb-8 leading-[0.9] tracking-tight ">
+          <h2 className="mb-4 text-[40px] font-black leading-[0.9] tracking-tight text-black md:text-[58px] lg:mb-8 lg:text-7xl">
             Money, finally <br /> simple
           </h2>
 
-          <p className="text-[16px] md:text-[24px] lg:text-3xl font-medium text-zinc-400 max-w-xl leading-snug">
+          <p className="mx-auto max-w-xl text-[16px] font-medium leading-snug text-zinc-400 md:text-[24px] lg:mx-0 lg:ml-auto lg:max-w-none lg:text-3xl">
             Avvio replaces multiple accounts, transfers, and apps with one account built for people who live between systems.
           </p>
         </motion.div>
-
       </div>
     </section>
   )

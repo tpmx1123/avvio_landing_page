@@ -29,7 +29,8 @@ function HomePage() {
     titleOpacity,
     titleY,
     phoneY,
-    phoneScale,
+    phoneScaleX,
+    phoneScaleY,
     phoneX,
     rotateX,
     rotateY,
@@ -38,7 +39,7 @@ function HomePage() {
     moneyY,
     moneyX,
     moneyScale,
-    blur,
+    moneyFilter,
   } = useHomeScrollAnimation(containerRef)
 
   useEffect(() => {
@@ -88,49 +89,52 @@ function HomePage() {
       <div className="min-h-svh lg:bg-white">
         <Navbar useColorLogo={useColorLogo} />
 
-        <main ref={containerRef} className="relative h-[205vh] lg:h-[190vh]">
-          <motion.div
-            className="sticky top-0 h-screen w-full "
-            style={{
-              background:  bgGradient,
-              perspective: '1200px',
-            }}
-          >
-            <div className="absolute inset-0 flex items-end justify-center">
+        <main
+          ref={containerRef}
+          className="relative min-h-[200svh] overflow-x-clip lg:min-h-[202svh]"
+        >
+          <div className="sticky top-0 z-10 h-svh min-h-svh w-full shrink-0  pointer-events-none">
+            <motion.div
+              aria-hidden
+              className="absolute inset-0"
+              style={{ background: bgGradient }}
+            />
+            <div className="absolute inset-0 flex items-end justify-center ">
               <motion.div
                 style={{
-                  y: phoneY,
+                  transformPerspective: 1200,
                   x: phoneX,
-                  scale: phoneScale,
+                  y: phoneY,
+                  scaleX: phoneScaleX,
+                  scaleY: phoneScaleY,
                   rotateX,
                   rotateY,
                   transformStyle: 'preserve-3d',
                   transformOrigin: 'center bottom',
                 }}
-                className="relative z-10 pointer-events-none"
+                className="relative w-max max-w-full will-change-transform"
               >
                 <img
                   src={PHONE_IMAGE}
                   alt="App"
-                  className="h-auto w-[min(92vw,420px)] lg:w-[min(42vw,420px)] object-contain"
+                  decoding="async"
+                  className="h-auto max-h-[min(88dvh,920px)] w-auto max-w-full object-contain select-none"
                 />
               </motion.div>
             </div>
+          </div>
 
-            <div className="absolute inset-0 z-20">
-              <Hero titleOpacity={titleOpacity} titleY={titleY} />
+          <div className="relative z-20 -mt-[100svh]">
+            <Hero titleOpacity={titleOpacity} titleY={titleY} />
 
-              <MoneySimpleSection
-                contentOpacity={moneyOpacity}
-                contentY={moneyY}
-                contentX={moneyX}
-                contentScale={moneyScale}
-                blur={blur}
-              />
-            </div>
-          </motion.div>
-
-          <div className="h-[145vh] lg:h-screen" />
+            <MoneySimpleSection
+              contentOpacity={moneyOpacity}
+              contentY={moneyY}
+              contentX={moneyX}
+              contentScale={moneyScale}
+              contentFilter={moneyFilter}
+            />
+          </div>
         </main>
         <GlobalIncomeSection />
         <MakeMoneySection />
