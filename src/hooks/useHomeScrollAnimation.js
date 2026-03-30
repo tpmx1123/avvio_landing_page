@@ -1,9 +1,21 @@
-import { useScroll, useSpring, useTransform } from 'framer-motion'
+﻿import { useScroll, useSpring, useTransform } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
-const SPRING = { stiffness: 86, damping: 38, mass: 0.85 }
-const END = 0.62
+const SPRING = { stiffness: 92, damping: 36, mass: 0.88 }
+const END = 0.44
 
 export function useHomeScrollAnimation(containerRef) {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    // Match Tailwind breakpoints: iPad Pro portrait is often exactly 1024px.
+    // Treat <= 1024px as the tablet/mobile variant so layout + animation stay in sync.
+    const checkMobile = () => setIsMobile(window.innerWidth <= 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
@@ -15,56 +27,80 @@ export function useHomeScrollAnimation(containerRef) {
 
   const smooth = useSpring(scrollClamped, SPRING)
 
-  const titleOpacity = useTransform(smooth, [0, 0.2], [1, 0])
-  const titleY = useTransform(smooth, [0, 0.2], [0, -100])
+  // Title fades out quickly
+  const titleOpacity = useTransform(smooth, [0, 0.12], [1, 0])
+  const titleY = useTransform(smooth, [0, 0.12], [0, -100])
 
+  // --- PHONE POSITION FIX ---
+  // We stop the phone at 0.35 by repeating the final value ['2vh', '2vh']
+  // This prevents the "drifting" bug in your video.
   const phoneY = useTransform(
     smooth,
-    [0, 0.18, 0.3, 0.42, 0.52, END],
-    ['84vh', '20vh', '12vh', '8vh', '4vh', '4vh']
+    [0, 0.35, END], 
+    isMobile ? ['55vh', '2vh', '2vh'] : ['88vh', '6vh', '6vh']
   )
 
   const phoneX = useTransform(
     smooth,
-    [0, 0.2, 0.32, 0.44, 0.54, END],
-    ['0vw', '-5vw', '-10vw', '-18vw', '-20vw', '-20vw']
+    [0, 0.35, END],
+    isMobile ? ['0vw', '0vw', '0vw'] : ['0vw', '-20vw', '-20vw']
   )
 
-  const PHONE_SCALE_T = [0, 0.18, 0.38, END]
+  const PHONE_SCALE_T = [0, 0.2, 0.35]
   const phoneScaleX = useTransform(
     smooth,
     PHONE_SCALE_T,
-    [2.8, 2.3, 1.42, 1.05]
+    isMobile ? [1.5, 1.2, 1.05] : [2.8, 1.7, 1.05]
   )
   const phoneScaleY = useTransform(
     smooth,
     PHONE_SCALE_T,
-    [2.00, 1.40, 1.20, 1.1]
+    isMobile ? [1.3, 1.1, 1.02] : [2.0, 1.3, 1.1]
   )
 
+  // Phone should be straight by the time the text starts
   const rotateX = useTransform(
     smooth,
-    [0, 0.16, 0.3, 0.42, 0.52, END],
-    [54, 38, 18, 5, 0, 0]
+    [0, 0.35], 
+    isMobile ? [25, 0] : [54, 0]
   )
 
-  // Phase 3 (~45%–62%): delayed narrator after hero/swoop; raw progress = sharp lock at END.
-  const MONEY_T = [0.45, 0.52, END]
-  const moneyOpacity = useTransform(scrollClamped, MONEY_T, [0, 1, 1, 1])
-  const moneyY = useTransform(scrollClamped, MONEY_T, [40, 10, 0, 0])
-  const moneyX = useTransform(scrollClamped, MONEY_T, [28, 8, 0, 0])
-  const moneyScale = useTransform(scrollClamped, MONEY_T, [0.94, 1, 1, 1])
-  const moneyFilter = useTransform(scrollClamped, MONEY_T, [
-    'blur(12px)',
-    'blur(0px)',
-    'blur(0px)',
-    'blur(0px)',
-  ])
-  const rotateY = 0
+  // --- MONEY TEXT LOGIC ---
+  // Desktop: 3 stops (0.35 -> 0.42 -> END)
+  // Mobile: remove 1 step (2 stops) for a tighter, smoother reveal.
+  const MONEY_T = [0.35, 0.42, END]
+
+  const moneyOpacity = useTransform(smooth, MONEY_T, [0, 1, 1])
+
+  const moneyX = useTransform(
+    smooth,
+    MONEY_T,
+    isMobile ? ['0vw', '0vw', '0vw'] : [22, 0, 0]
+  )
+
+  // High vertical offset for mobile ensures it stays BELOW the phone
+  const moneyY = useTransform(
+    smooth,
+    MONEY_T,
+    isMobile ? ['85vh', '68vh', '68vh'] : [36, 0, 0]
+  )
+
+  const moneyScale = useTransform(
+    smooth,
+    MONEY_T,
+    isMobile ? [0.9, 1, 1] : [0.9, 1, 1]
+  )
+
+  const moneyFilterT = isMobile ? [0.35, 0.4, END] : MONEY_T
+  const moneyFilterOut = isMobile
+    ? ['blur(12px)', 'blur(4px)', 'blur(0px)']
+    : ['blur(12px)', 'blur(0px)', 'blur(0px)']
+
+  const moneyFilter = useTransform(smooth, moneyFilterT, moneyFilterOut)
 
   const bgGradient = useTransform(
     smooth,
-    [0, 0.22, 0.42, END],
+    [0, 0.16, 0.32, 0.4],
     [
       'linear-gradient(to bottom, #ccff00 0%, #ccff00 100%)',
       'linear-gradient(to bottom, #ccff00 0%, #aaff00 45%, #e5ffb8 100%)',
@@ -81,7 +117,7 @@ export function useHomeScrollAnimation(containerRef) {
     phoneScaleY,
     phoneX,
     rotateX,
-    rotateY,
+    rotateY: 0,
     bgGradient,
     moneyOpacity,
     moneyY,

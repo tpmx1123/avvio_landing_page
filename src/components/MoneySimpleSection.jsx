@@ -10,10 +10,14 @@ export default function MoneySimpleSection({
   return (
     <section
       id="money-simple-section"
-      className="relative z-20 flex min-h-svh items-center justify-center bg-transparent px-6 lg:min-h-[132vh] lg:items-start lg:justify-center lg:px-14 lg:pb-8 lg:pt-8 xl:px-16"
+      className="relative z-20 flex min-h-svh w-full flex-col items-center px-10 pb-24 pt-14 lg:px-16"
     >
-      {/* Wider column + stronger left shift closes gap to the sticky phone */}
-      <div className="flex w-full max-w-md flex-col items-center text-center lg:ml-auto lg:max-w-none lg:w-[58%] lg:min-w-0 lg:-translate-x-14 lg:sticky lg:top-38 lg:z-30 lg:self-start  xl:w-[50%] xl:-translate-x-20">
+      {/* Container logic:
+          - Mobile: Center everything, add top padding so it doesn't hit the phone.
+          - Desktop: Shift content to the right (justify-end) to clear the phone on the left.
+      */}
+      <div className="flex w-full max-w-7xl flex-1 flex-col items-center justify-center lg:flex-row lg:justify-end">
+        
         <motion.div
           style={{
             opacity: contentOpacity,
@@ -22,15 +26,20 @@ export default function MoneySimpleSection({
             scale: contentScale,
             filter: contentFilter,
           }}
-          className="w-full max-w-xl lg:max-w-none lg:w-xl"
+          // max-w-xl on mobile keeps the text from being too wide
+          // lg:w-1/2 on desktop ensures it only takes up the right half of the screen
+          className="z-30 flex w-full max-w-xl flex-col items-center text-center lg:max-w-2xl "
         >
-          <h2 className="mb-4 text-[40px] font-black leading-[0.9] tracking-tight text-black md:text-[58px] lg:mb-8 lg:text-7xl">
-            Money, finally <br /> simple
+          <h2 className="text-[10vw] font-black leading-[0.9] tracking-tighter text-black sm:text-5xl md:text-6xl lg:text-7xl ">
+            Money, finally <br className="hidden lg:block" /> simple
           </h2>
 
-          <p className="mx-auto max-w-xl text-[16px] font-medium leading-snug text-zinc-400 md:text-[24px] lg:mx-0 lg:ml-auto lg:max-w-none lg:text-3xl">
-            Avvio replaces multiple accounts, transfers, and apps with one account built for people who live between systems.
+          <p className="mt-6 text-lg font-medium leading-snug text-zinc-500 md:text-2xl lg:mt-8 lg:text-3xl">
+            Avvio replaces multiple accounts, transfers, and apps with one
+            account built for people who live between systems.
           </p>
+          
+          {/* Optional: Add a button here if needed for mobile CTA */}
         </motion.div>
       </div>
     </section>

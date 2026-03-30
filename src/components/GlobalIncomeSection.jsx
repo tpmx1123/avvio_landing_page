@@ -21,7 +21,7 @@ const cards = [
 export default function GlobalIncomeSection() {
   return (
     <section className="bg-white py-14 px-6 md:px-12">
-      <div className="mx-auto max-w-7xl pt-50 md:pt-20">
+      <div className="mx-auto max-w-7xl pt-50 md:pt-25">
 
         {/* 🔥 HEADER */}
         <div className="text-center mb-16">

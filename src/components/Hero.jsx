@@ -6,7 +6,7 @@ export default function Hero({ titleOpacity, titleY }) {
   return (
     <section
       id="hero-section"
-      className="relative z-20 flex min-h-svh flex-col items-center justify-start px-6 pt-32 text-center lg:justify-center lg:px-8 lg:pt-20"
+      className="relative z-20 flex min-h-svh flex-col items-center justify-start px-6 pt-42 text-center lg:justify-center lg:px-8 lg:pt-20"
     >
       <motion.div
         className="pointer-events-auto max-w-6xl"
@@ -17,7 +17,7 @@ export default function Hero({ titleOpacity, titleY }) {
             - leading-[1] on mobile to give more breathing room.
             - tracking-tighter for that high-end look.
         */}
-        <h1 className="mb-6 text-[38px] font-black leading-none text-black sm:text-[60px] lg:text-[72px] lg:leading-[0.9] uppercase tracking-tighter">
+        <h1 className="mb-6 text-[38px] font-black leading-none text-black sm:text-[60px] lg:text-[72px]  uppercase ">
           One global <br className="lg:hidden" /> banking for <br /> digital life
         </h1>
 

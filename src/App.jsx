@@ -91,9 +91,9 @@ function HomePage() {
 
         <main
           ref={containerRef}
-          className="relative min-h-[200svh] overflow-x-clip lg:min-h-[202svh]"
+          className="relative min-h-[125svh] overflow-x-clip lg:min-h-[128svh]"
         >
-          <div className="sticky top-0 z-10 h-svh min-h-svh w-full shrink-0  pointer-events-none">
+          <div className="sticky top-0 z-10 h-svh min-h-svh w-full pointer-events-none">
             <motion.div
               aria-hidden
               className="absolute inset-0"
