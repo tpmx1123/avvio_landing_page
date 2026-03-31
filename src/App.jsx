@@ -18,6 +18,7 @@ import Blog from './components/blogPosts'
 import VirtualAccountsSection from './components/VirtualAccountsSection'
 import OneAccountSection from './components/OneAccountSection'
 import FAQ from './components/FAQ'
+import JoinPage from './components/JoinPage'
 
 const PHONE_IMAGE =
   'https://res.cloudinary.com/di4caiech/image/upload/v1774596314/EWu41VqQkx12Iz9EYP12sxSuk_2_tpro6q.avif'
@@ -99,40 +100,57 @@ function HomePage() {
               className="absolute inset-0"
               style={{ background: bgGradient }}
             />
-            <div className="absolute inset-0 flex items-end justify-center ">
-              <motion.div
-                style={{
-                  transformPerspective: 1200,
-                  x: phoneX,
-                  y: phoneY,
-                  scaleX: phoneScaleX,
-                  scaleY: phoneScaleY,
-                  rotateX,
-                  rotateY,
-                  transformStyle: 'preserve-3d',
-                  transformOrigin: 'center bottom',
-                }}
-                className="relative w-max max-w-full will-change-transform"
-              >
-                <img
-                  src={PHONE_IMAGE}
-                  alt="App"
-                  decoding="async"
-                  className="h-auto max-h-[min(88dvh,920px)] w-auto max-w-full object-contain select-none"
-                />
-              </motion.div>
+            // inside HomePage...
+<div className="absolute inset-0 flex items-start lg:items-end justify-center pt-20 lg:pt-0">
+  <motion.div
+    style={{
+      transformPerspective: 1200,
+      x: phoneX,
+      y: phoneY,
+      scaleX: phoneScaleX,
+      scaleY: phoneScaleY,
+      rotateX,
+      rotateY,
+      transformStyle: 'preserve-3d',
+      transformOrigin: 'center bottom',
+    }}
+    className="relative w-max max-w-full will-change-transform"
+  >
+    <img
+      src={PHONE_IMAGE}
+      alt="App"
+      // Cap height on mobile so text has room at the bottom
+      className="h-auto max-h-[54svh] sm:max-h-[60svh] lg:max-h-[min(88dvh,920px)] w-auto max-w-[80vw] lg:max-w-full object-contain"
+    />
+  </motion.div>
+</div>
+
+            {/* Desktop-only overlay text (beside phone) */}
+            <div className="hidden lg:block">
+              <MoneySimpleSection
+                contentOpacity={moneyOpacity}
+                contentY={moneyY}
+                contentX={moneyX}
+                contentScale={moneyScale}
+                contentFilter={moneyFilter}
+              />
             </div>
           </div>
 
+          {/* Pull only the Hero into the sticky viewport */}
           <div className="relative z-20 -mt-[100svh]">
             <Hero titleOpacity={titleOpacity} titleY={titleY} />
+          </div>
 
+          {/* Mobile: show Money text after the phone image, without motion */}
+          <div className="relative z-20 lg:hidden">
             <MoneySimpleSection
               contentOpacity={moneyOpacity}
               contentY={moneyY}
               contentX={moneyX}
               contentScale={moneyScale}
               contentFilter={moneyFilter}
+              mobileBelow
             />
           </div>
         </main>
@@ -154,6 +172,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/join" element={<JoinPage />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/brand" element={<Brand />} />

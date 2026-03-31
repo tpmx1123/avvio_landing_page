@@ -1,15 +1,12 @@
-﻿import { useScroll, useSpring, useTransform } from 'framer-motion'
+import { useScroll, useSpring, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
-const SPRING = { stiffness: 92, damping: 36, mass: 0.88 }
-const END = 0.44
+const SPRING = { stiffness: 60, damping: 45, mass: 0.5 }
 
 export function useHomeScrollAnimation(containerRef) {
   const [isMobile, setIsMobile] = useState(false)
   
   useEffect(() => {
-    // Match Tailwind breakpoints: iPad Pro portrait is often exactly 1024px.
-    // Treat <= 1024px as the tablet/mobile variant so layout + animation stay in sync.
     const checkMobile = () => setIsMobile(window.innerWidth <= 1024)
     checkMobile()
     window.addEventListener('resize', checkMobile)
@@ -21,108 +18,77 @@ export function useHomeScrollAnimation(containerRef) {
     offset: ['start start', 'end end'],
   })
 
-  const scrollClamped = useTransform(scrollYProgress, (v) =>
-    Math.min(1, Math.max(0, v))
-  )
+  const smooth = useSpring(scrollYProgress, SPRING)
 
-  const smooth = useSpring(scrollClamped, SPRING)
+  // 1. HERO TITLE
+  const titleOpacity = useTransform(smooth, [0, 0.1], [1, 0])
+  const titleY = useTransform(smooth, [0, 0.1], [0, -40])
 
-  // Title fades out quickly
-  const titleOpacity = useTransform(smooth, [0, 0.12], [1, 0])
-  const titleY = useTransform(smooth, [0, 0.12], [0, -100])
+  // 2. TIMING WINDOW
+  const desktopT = [0.05, 0.35, 0.55, 0.75]
+  // Mobile uses fewer steps to reduce "bouncy" motion while scrolling.
+  const mobileT = [0.05, 0.35]
 
-  // --- PHONE POSITION FIX ---
-  // We stop the phone at 0.35 by repeating the final value ['2vh', '2vh']
-  // This prevents the "drifting" bug in your video.
-  const phoneY = useTransform(
+  // Phone Position
+  // Mobile: stays at 8vh (top) | Desktop: stays at 6vh (centered)
+  const phoneYDesktop = useTransform(smooth, desktopT, [
+    '88vh',
+    '6vh',
+    '6vh',
+    '6vh',
+  ])
+  const phoneYMobile = useTransform(smooth, mobileT, ['60vh', '2vh'])
+  const phoneY = isMobile ? phoneYMobile : phoneYDesktop
+
+  const phoneXDesktop = useTransform(smooth, desktopT, ['0vw', '-18vw', '-18vw', '-18vw'])
+  const phoneXMobile = useTransform(smooth, mobileT, ['0vw', '0vw'])
+  const phoneX = isMobile ? phoneXMobile : phoneXDesktop
+  
+  const phoneScaleX = useTransform(smooth, [0.05, 0.35], isMobile ? [1.6, 1.15] : [2.6, 1.2])
+  const phoneScaleY = useTransform(smooth, [0.05, 0.35], isMobile ? [1.3, 1.12] : [1.9, 1.1])
+  const rotateX = useTransform(smooth, [0.05, 0.35], isMobile ? [22, 0] : [52, 0])
+
+  // 3. MONEY TEXT REVEAL
+  const MONEY_T = [0.25, 0.60] 
+
+  const moneyOpacityDesktop = useTransform(smooth, MONEY_T, [0, 1])
+  const moneyOpacityMobile = useTransform(smooth, [0, 1], [1, 1])
+  const moneyOpacity = isMobile ? moneyOpacityMobile : moneyOpacityDesktop
+  
+  // Money text: on mobile we keep it "stuck" to the bottom of the phone
+  // (no y/x/scale/filter animation), while desktop keeps the reveal motion.
+  const moneyYDesktop = useTransform(smooth, MONEY_T, ['30px', '0px'])
+  const moneyYMobile = useTransform(smooth, [0, 1], ['0px', '0px'])
+  const moneyY = isMobile ? moneyYMobile : moneyYDesktop
+
+  const moneyXDesktop = useTransform(smooth, MONEY_T, ['40px', '0px'])
+  const moneyXMobile = useTransform(smooth, [0, 1], [0, 0])
+  const moneyX = isMobile ? moneyXMobile : moneyXDesktop
+
+  const moneyScaleDesktop = useTransform(smooth, MONEY_T, [0.96, 1])
+  const moneyScaleMobile = useTransform(smooth, [0, 1], [1, 1])
+  const moneyScale = isMobile ? moneyScaleMobile : moneyScaleDesktop
+
+  const moneyFilterDesktop = useTransform(
     smooth,
-    [0, 0.35, END], 
-    isMobile ? ['55vh', '2vh', '2vh'] : ['88vh', '6vh', '6vh']
+    [0.25, 0.45, 0.60],
+    ['blur(15px)', 'blur(0px)', 'blur(0px)']
   )
-
-  const phoneX = useTransform(
-    smooth,
-    [0, 0.35, END],
-    isMobile ? ['0vw', '0vw', '0vw'] : ['0vw', '-20vw', '-20vw']
-  )
-
-  const PHONE_SCALE_T = [0, 0.2, 0.35]
-  const phoneScaleX = useTransform(
-    smooth,
-    PHONE_SCALE_T,
-    isMobile ? [1.5, 1.2, 1.05] : [2.8, 1.7, 1.05]
-  )
-  const phoneScaleY = useTransform(
-    smooth,
-    PHONE_SCALE_T,
-    isMobile ? [1.3, 1.1, 1.02] : [2.0, 1.3, 1.1]
-  )
-
-  // Phone should be straight by the time the text starts
-  const rotateX = useTransform(
-    smooth,
-    [0, 0.35], 
-    isMobile ? [25, 0] : [54, 0]
-  )
-
-  // --- MONEY TEXT LOGIC ---
-  // Desktop: 3 stops (0.35 -> 0.42 -> END)
-  // Mobile: remove 1 step (2 stops) for a tighter, smoother reveal.
-  const MONEY_T = [0.35, 0.42, END]
-
-  const moneyOpacity = useTransform(smooth, MONEY_T, [0, 1, 1])
-
-  const moneyX = useTransform(
-    smooth,
-    MONEY_T,
-    isMobile ? ['0vw', '0vw', '0vw'] : [22, 0, 0]
-  )
-
-  // High vertical offset for mobile ensures it stays BELOW the phone
-  const moneyY = useTransform(
-    smooth,
-    MONEY_T,
-    isMobile ? ['85vh', '68vh', '68vh'] : [36, 0, 0]
-  )
-
-  const moneyScale = useTransform(
-    smooth,
-    MONEY_T,
-    isMobile ? [0.9, 1, 1] : [0.9, 1, 1]
-  )
-
-  const moneyFilterT = isMobile ? [0.35, 0.4, END] : MONEY_T
-  const moneyFilterOut = isMobile
-    ? ['blur(12px)', 'blur(4px)', 'blur(0px)']
-    : ['blur(12px)', 'blur(0px)', 'blur(0px)']
-
-  const moneyFilter = useTransform(smooth, moneyFilterT, moneyFilterOut)
-
+  const moneyFilterMobile = useTransform(smooth, [0, 1], ['blur(0px)', 'blur(0px)'])
+  const moneyFilter = isMobile ? moneyFilterMobile : moneyFilterDesktop
+  // 4. BACKGROUND
   const bgGradient = useTransform(
     smooth,
-    [0, 0.16, 0.32, 0.4],
+    [0, 0.20, 0.50],
     [
       'linear-gradient(to bottom, #ccff00 0%, #ccff00 100%)',
-      'linear-gradient(to bottom, #ccff00 0%, #aaff00 45%, #e5ffb8 100%)',
-      'linear-gradient(to bottom, #f2ffd8 0%, #ffffff 100%)',
+      'linear-gradient(to bottom, #ccff00 100%, #ccff00 0%)',
       'linear-gradient(to bottom, #ffffff 0%, #ffffff 100%)',
     ]
   )
 
   return {
-    titleOpacity,
-    titleY,
-    phoneY,
-    phoneScaleX,
-    phoneScaleY,
-    phoneX,
-    rotateX,
-    rotateY: 0,
-    bgGradient,
-    moneyOpacity,
-    moneyY,
-    moneyX,
-    moneyScale,
-    moneyFilter,
+    titleOpacity, titleY, phoneY, phoneScaleX, phoneScaleY, phoneX, rotateX,
+    rotateY: 0, bgGradient, moneyOpacity, moneyY, moneyX, moneyScale, moneyFilter,
   }
 }

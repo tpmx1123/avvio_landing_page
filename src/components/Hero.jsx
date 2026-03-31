@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
-const JOIN = 'https://avvio.xyz/join'
+const MotionLink = motion(Link)
 
 export default function Hero({ titleOpacity, titleY }) {
   return (
@@ -29,15 +30,15 @@ export default function Hero({ titleOpacity, titleY }) {
           Get paid, save, invest, & spend everywhere
         </p>
 
-        <motion.a
-          href={JOIN}
+        <MotionLink
+          to="/join"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           // Slightly smaller button on mobile (px-8 py-4)
           className="inline-flex rounded-full bg-black px-8 py-4 text-[15px] font-bold text-[#DFFF00] lg:px-12 lg:py-6 lg:text-[16px] "
         >
           Get early access
-        </motion.a>
+        </MotionLink>
       </motion.div>
     </section>
   )
